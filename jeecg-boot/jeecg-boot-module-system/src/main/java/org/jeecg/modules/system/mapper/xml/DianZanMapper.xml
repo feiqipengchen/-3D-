@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.DianZanMapper">
+    <select id="getDianZan" parameterType="org.jeecg.modules.system.entity.DianZanEntity"
+            resultType="org.jeecg.modules.system.entity.DianZanEntity">
+		SELECT *
+		FROM dianzan
+		WHERE yifuzhonglei =#{dianZanEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{dianZanEntity.yifubianhao, jdbcType=INTEGER} AND
+		caizhibianhao= #{dianZanEntity.caizhibianhao, jdbcType=INTEGER}
+    </select>
+	<insert id="insertDianZan" parameterType="org.jeecg.modules.system.entity.DianZanEntity">
+		INSERT INTO dianzan (yifuzhonglei,yifubianhao,caizhibianhao,dianzan,xiaolian,zhonglian,kulian)
+		VALUES (#{dianZanEntity.yifuzhonglei, jdbcType=VARCHAR},
+		#{dianZanEntity.yifubianhao, jdbcType=INTEGER},
+	   #{dianZanEntity.caizhibianhao, jdbcType=INTEGER},
+	   0,0,0,0)
+    </insert>
+	<update id="updateDianZan" parameterType="org.jeecg.modules.system.entity.DianZanEntity">
+		UPDATE dianzan
+		SET dianzan=#{dianZanEntity.dianzan, jdbcType=INTEGER},
+		xiaolian=#{dianZanEntity.xiaolian, jdbcType=INTEGER},
+		zhonglian=#{dianZanEntity.zhonglian, jdbcType=INTEGER},
+		kulian=#{dianZanEntity.kulian, jdbcType=INTEGER}
+		WHERE yifuzhonglei =#{dianZanEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{dianZanEntity.yifubianhao, jdbcType=INTEGER} AND
+		caizhibianhao= #{dianZanEntity.caizhibianhao, jdbcType=INTEGER}
+	</update>
+
+<!--以下三个方法获取用户满意度的总数-->
+	<select id="getDianZanXiaoLian" parameterType="org.jeecg.modules.system.entity.DianZanEntity"
+			resultType="java.lang.Integer">
+		SELECT SUM(xiaolian)
+		FROM dianzan
+		WHERE yifuzhonglei =#{dianZanEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{dianZanEntity.yifubianhao, jdbcType=INTEGER}
+    </select>
+
+	<select id="getDianZanZhongLian" parameterType="org.jeecg.modules.system.entity.DianZanEntity"
+			resultType="java.lang.Integer">
+		SELECT SUM(zhonglian)
+		FROM dianzan
+		WHERE yifuzhonglei =#{dianZanEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{dianZanEntity.yifubianhao, jdbcType=INTEGER}
+    </select>
+
+	<select id="getDianZanKuLian" parameterType="org.jeecg.modules.system.entity.DianZanEntity"
+			resultType="java.lang.Integer">
+		SELECT SUM(kulian)
+		FROM dianzan
+		WHERE yifuzhonglei =#{dianZanEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{dianZanEntity.yifubianhao, jdbcType=INTEGER}
+    </select>
+</mapper>

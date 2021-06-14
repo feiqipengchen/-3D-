@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.UserCustomRecordMapper">
+    <!--    用户定制记录-->
+    <select id="getUserCustomRecord" parameterType="String"
+            resultType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+		SELECT *
+		FROM customrecord
+		WHERE dingdanren = #{dingdanren, jdbcType=VARCHAR} AND
+wancheng="交易完成"
+    </select>
+    <select id="getUserCustomRecordSelect" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity"
+            resultType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+		SELECT*FROM customrecord WHERE
+dingdanren=#{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR}  AND
+(yifuzhonglei=#{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR} OR #{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR} IS NULL) AND
+(yifubianhao=#{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} OR #{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} IS NULL) AND
+(caizhibainhao=#{userCustomRecordEntity.caizhibainhao, jdbcType=INTEGER} OR #{userCustomRecordEntity.caizhibainhao, jdbcType=INTEGER} IS NULL)AND
+(yifuxinghao=#{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR} OR #{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR} IS NULL) AND
+wancheng="交易完成"
+    </select>
+    <!--    用户定制中-->
+    <select id="getUserCustoming" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity"
+            resultType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+		SELECT*FROM customrecord WHERE
+dingdanren=#{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR}  AND
+wancheng IN ("待发货","待签收")
+    </select>
+    <select id="getUserCustomingSelect" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity"
+            resultType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+		SELECT*FROM customrecord WHERE
+dingdanren=#{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR}  AND
+(yifuzhonglei=#{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR} OR #{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR} IS NULL) AND
+(yifubianhao=#{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} OR #{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} IS NULL) AND
+(caizhibainhao=#{userCustomRecordEntity.caizhibainhao, jdbcType=INTEGER} OR #{userCustomRecordEntity.caizhibainhao, jdbcType=INTEGER} IS NULL)AND
+(yifuxinghao=#{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR} OR #{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR} IS NULL) AND
+wancheng IN ("待发货","待签收")
+    </select>
+    <update id="updateUserCustomingSelect" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+        UPDATE customrecord SET wancheng="交易完成"
+        WHERE dingdanren=#{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR}  AND
+yifuzhonglei=#{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR}  AND
+yifubianhao=#{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} AND
+caizhibainhao=#{userCustomRecordEntity.caizhibainhao, jdbcType=INTEGER} AND
+jianshu=#{userCustomRecordEntity.jianshu, jdbcType=INTEGER} AND
+yifuxinghao=#{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR}  AND
+wancheng = "待签收"
+    </update>
+    <!--更新-->
+    <update id="updateUserCustomingSelect1" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+        UPDATE customrecord SET wancheng="交易完成"
+        WHERE id=#{userCustomRecordEntity.id, jdbcType=VARCHAR}
+    </update>
+    <!--    //用户未定制-->
+    <select id="getUserUnCustom" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity"
+            resultType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+		SELECT*FROM customrecord WHERE
+dingdanren=#{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR}  AND
+wancheng="待定制"
+    </select>
+    <select id="getUserUnCustomSelect" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity"
+            resultType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+		SELECT*FROM customrecord WHERE
+dingdanren=#{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR}  AND
+(yifuzhonglei=#{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR} OR #{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR} IS NULL) AND
+(yifubianhao=#{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} OR #{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} IS NULL) AND
+(caizhibainhao=#{userCustomRecordEntity.caizhibainhao, jdbcType=INTEGER} OR #{userCustomRecordEntity.caizhibainhao, jdbcType=INTEGER} IS NULL)AND
+(yifuxinghao=#{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR} OR #{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR} IS NULL) AND
+wancheng="待定制"
+    </select>
+    <update id="updateUserUnCustomSelect" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+        UPDATE customrecord SET wancheng="待发货"
+        WHERE dingdanren=#{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR}  AND
+yifuzhonglei=#{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR}  AND
+yifubianhao=#{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} AND
+caizhibainhao=#{userCustomRecordEntity.caizhibainhao, jdbcType=INTEGER} AND
+jianshu=#{userCustomRecordEntity.jianshu, jdbcType=INTEGER} AND
+yifuxinghao=#{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR}  AND
+wancheng = "待定制"
+    </update>
+    <!--   更新-->
+    <update id="updateUserUnCustomSelect1" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity">
+        UPDATE customrecord SET wancheng="待发货"
+        WHERE id=#{userCustomRecordEntity.id, jdbcType=VARCHAR}
+    </update>
+
+    <!--用户购买某一种类件数或管理员-->
+    <select id="getUserCustomedSpeciesNumber" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity"
+            resultType="java.lang.Integer">
+        SELECT SUM(jianshu)
+        FROM customrecord
+        WHERE  (dingdanren=#{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR} OR #{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR} IS NULL)
+        AND yifuzhonglei=#{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR}
+        AND wancheng="交易完成"
+    </select>
+
+    <!--用户购买某一种类件数管理员-->
+    <select id="getUserCustomedSizeNumber" parameterType="org.jeecg.modules.system.entity.UserCustomRecordEntity"
+            resultType="java.lang.Integer">
+        SELECT SUM(jianshu)
+        FROM customrecord
+        WHERE (dingdanren=#{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR} OR #{userCustomRecordEntity.dingdanren, jdbcType=VARCHAR} IS NULL)
+        AND (yifuzhonglei=#{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR} OR #{userCustomRecordEntity.yifuzhonglei, jdbcType=VARCHAR} IS NULL)
+        AND (yifuxinghao=#{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR} OR #{userCustomRecordEntity.yifuxinghao, jdbcType=VARCHAR} IS NULL)
+        AND (yifubianhao=#{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} OR #{userCustomRecordEntity.yifubianhao, jdbcType=INTEGER} IS NULL)
+        AND wancheng="交易完成"
+    </select>
+</mapper>

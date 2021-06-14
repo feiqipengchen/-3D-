@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.JueSeMapper">
+
+	<insert id="insertJueSe" parameterType="java.lang.String">
+		INSERT INTO sys_user_role(id,user_id,role_id)
+		VALUES (#{id, jdbcType=VARCHAR},
+		#{jueSe, jdbcType=VARCHAR},
+		"f6817f48af4fb3af11b9e8bf182f618b")
+    </insert>
+	<select id="selectJueSe" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT id
+		FROM sys_user
+		WHERE username=#{jueSe, jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteJueSe" parameterType="java.lang.String">
+	DELETE  FROM sys_user_role
+		WHERE user_id =#{jueSe, jdbcType=VARCHAR}
+	</delete>
+</mapper>

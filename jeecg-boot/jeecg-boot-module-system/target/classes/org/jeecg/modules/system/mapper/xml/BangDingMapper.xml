@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.BangDingMapper">
+    <select id="getBangDing" parameterType="String"
+            resultType="org.jeecg.modules.system.entity.BangDingEntity">
+		SELECT *
+		FROM bangding
+		WHERE yonghu =#{yonghu, jdbcType=VARCHAR}
+    </select>
+	<insert id="insertBangDing" parameterType="org.jeecg.modules.system.entity.BangDingEntity">
+		INSERT INTO bangding
+		VALUES (#{bangDingEntity.yonghu, jdbcType=VARCHAR},
+		#{bangDingEntity.kahao, jdbcType=VARCHAR})
+    </insert>
+	<delete id="deleteBangDing" parameterType="org.jeecg.modules.system.entity.BangDingEntity">
+	DELETE  FROM bangding
+		WHERE yonghu =#{bangDingEntity.yonghu, jdbcType=VARCHAR}AND
+		kahao = #{bangDingEntity.kahao, jdbcType=VARCHAR}
+	</delete>
+</mapper>

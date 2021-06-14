@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.YiFuMapper">
+    <select id="getYiFu"
+            resultType="org.jeecg.modules.system.entity.YiFuEntity">
+		SELECT *
+		FROM yifu
+		ORDER BY jianshu ASC 
+    </select>
+    <select id="getYiFuSelect" parameterType="org.jeecg.modules.system.entity.YiFuEntity"
+            resultType="org.jeecg.modules.system.entity.YiFuEntity">
+		SELECT *
+		FROM yifu
+		WHERE (yifuzhonglei =#{yiFuEntity.yifuzhonglei, jdbcType=VARCHAR} OR #{yiFuEntity.yifuzhonglei, jdbcType=VARCHAR} IS NULL)AND
+		(yifubianhao = #{yiFuEntity.yifubianhao, jdbcType=INTEGER} OR #{yiFuEntity.yifubianhao, jdbcType=INTEGER} IS NULL) AND
+		(yifuxinghao= #{yiFuEntity.yifuxinghao, jdbcType=VARCHAR} OR #{yiFuEntity.yifuxinghao, jdbcType=VARCHAR} IS NULL)
+	</select>
+    <update id="updateYiFu" parameterType="org.jeecg.modules.system.entity.YiFuEntity">
+		UPDATE yifu
+		SET jianshu=jianshu+#{yiFuEntity.jianshu, jdbcType=INTEGER}
+		WHERE yifuzhonglei =#{yiFuEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{yiFuEntity.yifubianhao, jdbcType=INTEGER} AND
+		yifuxinghao= #{yiFuEntity.yifuxinghao, jdbcType=VARCHAR}
+	</update>
+	<update id="updateYiFuJiaGe" parameterType="org.jeecg.modules.system.entity.YiFuEntity">
+		UPDATE yifu
+		SET jiage=#{yiFuEntity.jiage, jdbcType=INTEGER}
+		WHERE yifuzhonglei =#{yiFuEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{yiFuEntity.yifubianhao, jdbcType=INTEGER} AND
+		yifuxinghao= #{yiFuEntity.yifuxinghao, jdbcType=VARCHAR}
+	</update>
+    <insert id="insertYiFu" parameterType="org.jeecg.modules.system.entity.YiFuEntity">
+		INSERT INTO  yifu(yifuzhonglei,yifubianhao,yifuxinghao,jianshu)
+	VALUES (
+	    #{yiFuEntity.yifuzhonglei, jdbcType=VARCHAR},
+		#{yiFuEntity.yifubianhao, jdbcType=INTEGER},
+		#{yiFuEntity.yifuxinghao, jdbcType=VARCHAR},
+		#{yiFuEntity.jianshu, jdbcType=INTEGER})
+	</insert>
+    <delete id="deleteYiFu" parameterType="org.jeecg.modules.system.entity.YiFuEntity">
+	DELETE FROM  yifu
+	WHERE
+	    yifuzhonglei=#{yiFuEntity.yifuzhonglei, jdbcType=VARCHAR} AND
+		yifubianhao=#{yiFuEntity.yifubianhao, jdbcType=INTEGER} AND
+		yifuxinghao=#{yiFuEntity.yifuxinghao, jdbcType=VARCHAR}
+	</delete>
+<!--管理员获取衣服种类编号-->
+	<select id="getYiFuSpecies" parameterType="java.lang.String"
+			resultType="java.lang.Integer">
+		SELECT DISTINCT (yifubianhao)
+		FROM yifu
+		WHERE yifuzhonglei =#{yifuzhonglei, jdbcType=VARCHAR}
+	</select>
+</mapper>

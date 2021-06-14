@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.YiFuBiaoJiaMapper">
+    <select id="getYiFuBiaoJia" parameterType="org.jeecg.modules.system.entity.YiFuBiaoJiaEntity"
+            resultType="java.lang.Integer">
+		SELECT jiage
+		FROM yifubiaojia
+		WHERE yifuzhonglei =#{yiFuBiaoJiaEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{yiFuBiaoJiaEntity.yifubianhao, jdbcType=INTEGER} AND
+		caizhibianhao= #{yiFuBiaoJiaEntity.caizhibianhao, jdbcType=INTEGER}
+    </select>
+
+	<update id="updateYiFuBiaoJia" parameterType="org.jeecg.modules.system.entity.YiFuBiaoJiaEntity">
+		UPDATE yifubiaojia
+		SET jiage=#{yiFuBiaoJiaEntity.jiage, jdbcType=INTEGER},
+		WHERE yifuzhonglei =#{yiFuBiaoJiaEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{yiFuBiaoJiaEntity.yifubianhao, jdbcType=INTEGER} AND
+		caizhibianhao= #{yiFuBiaoJiaEntity.caizhibianhao, jdbcType=INTEGER}
+	</update>
+	<insert id="insertYiFuBiaoJia" parameterType="org.jeecg.modules.system.entity.YiFuBiaoJiaEntity">
+		INSERT INTO  yifubiaojia
+	VALUES (
+	    #{yiFuBiaoJiaEntity.yifuzhonglei, jdbcType=VARCHAR},
+		#{yiFuBiaoJiaEntity.yifubianhao, jdbcType=INTEGER},
+		#{yiFuBiaoJiaEntity.caizhibianhao, jdbcType=INTEGER},
+		#{yiFuBiaoJiaEntity.jiage, jdbcType=INTEGER})
+	</insert>
+</mapper>

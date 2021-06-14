@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.CaiZhiMapper">
+    <select id="getCaiZhi"
+            resultType="org.jeecg.modules.system.entity.CaiZhiEntity">
+		SELECT *
+		FROM caizhi
+		ORDER BY jianshu ASC
+    </select>
+    <select id="getCaiZhiSelect" parameterType="org.jeecg.modules.system.entity.CaiZhiEntity"
+            resultType="org.jeecg.modules.system.entity.CaiZhiEntity">
+		SELECT *
+		FROM caizhi
+		WHERE
+		caizhibianhao = #{caiZhiEntity.caizhibianhao, jdbcType=INTEGER} OR #{caiZhiEntity.caizhibianhao, jdbcType=INTEGER} IS NULL
+			</select>
+    <update id="updateCaiZhi" parameterType="org.jeecg.modules.system.entity.CaiZhiEntity">
+		UPDATE caizhi
+		SET jianshu=jianshu+#{caiZhiEntity.jianshu, jdbcType=INTEGER}
+		WHERE
+		caizhibianhao= #{caiZhiEntity.caizhibianhao, jdbcType=INTEGER}
+	</update>
+	<update id="updateCaiZhiJiaGe" parameterType="org.jeecg.modules.system.entity.CaiZhiEntity">
+		UPDATE caizhi
+		SET jiage=#{caiZhiEntity.jiage, jdbcType=INTEGER}
+		WHERE
+		caizhibianhao= #{caiZhiEntity.caizhibianhao, jdbcType=INTEGER}
+	</update>
+    <insert id="insertCaiZhi" parameterType="org.jeecg.modules.system.entity.CaiZhiEntity">
+		INSERT INTO  caizhi(caizhibianhao,jianshu)
+	VALUES (
+		#{caiZhiEntity.caizhibianhao, jdbcType=INTEGER},
+		#{caiZhiEntity.jianshu, jdbcType=INTEGER})
+	</insert>
+    <delete id="deleteCaiZhi" parameterType="org.jeecg.modules.system.entity.CaiZhiEntity">
+	DELETE FROM  caizhi
+	WHERE
+		caizhibianhao=#{caiZhiEntity.caizhibianhao, jdbcType=INTEGER}
+	</delete>
+</mapper>

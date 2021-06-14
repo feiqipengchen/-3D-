@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.YanLunMapper">
+    <select id="getYanLun" parameterType="org.jeecg.modules.system.entity.YanLunEntity"
+            resultType="org.jeecg.modules.system.entity.YanLunEntity">
+		SELECT *
+		FROM yanlun
+		WHERE yifuzhonglei =#{yanLunEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{yanLunEntity.yifubianhao, jdbcType=INTEGER} AND
+		caizhibianhao= #{yanLunEntity.caizhibianhao, jdbcType=INTEGER}
+    </select>
+    <insert id="insertYanLun" parameterType="org.jeecg.modules.system.entity.YanLunEntity">
+		INSERT INTO yanlun (yifuzhonglei,yifubianhao,caizhibianhao,author,pingfen,content,datetime)
+		VALUES (#{yanLunEntity.yifuzhonglei, jdbcType=VARCHAR},
+	   #{yanLunEntity.yifubianhao, jdbcType=INTEGER},
+	   #{yanLunEntity.caizhibianhao, jdbcType=INTEGER},
+	   #{yanLunEntity.author, jdbcType=VARCHAR},
+	   #{yanLunEntity.pingfen, jdbcType=INTEGER},
+	   #{yanLunEntity.content, jdbcType=VARCHAR},
+	   #{yanLunEntity.datetime, jdbcType=VARCHAR}
+	  )
+    </insert>
+
+<!--获取相应评分等级的个数-->
+	<select id="getYanLunXingJi" parameterType="org.jeecg.modules.system.entity.YanLunEntity"
+			resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM yanlun
+		WHERE yifuzhonglei =#{yanLunEntity.yifuzhonglei, jdbcType=VARCHAR}AND
+		yifubianhao = #{yanLunEntity.yifubianhao, jdbcType=INTEGER} AND
+		pingfen= #{yanLunEntity.pingfen, jdbcType=INTEGER}
+    </select>
+</mapper>

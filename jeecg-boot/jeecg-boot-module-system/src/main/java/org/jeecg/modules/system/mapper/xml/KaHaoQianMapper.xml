@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.KaHaoQianMapper">
+    <select id="getKaHaoQian" parameterType="String"
+            resultType="org.jeecg.modules.system.entity.KaHaoQianEntity">
+		SELECT *
+		FROM kahaoqian
+		WHERE kahao =#{kahao, jdbcType=VARCHAR}
+    </select>
+	<update id="updateKaHaoQian" parameterType="org.jeecg.modules.system.entity.YongHuQianEntity">
+		UPDATE kahaoqian
+		SET qian=#{kaHaoQianEntity.qian, jdbcType=INTEGER}
+		WHERE kahao =#{kaHaoQianEntity.kahao, jdbcType=VARCHAR}
+	</update>
+</mapper>
